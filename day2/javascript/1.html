@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            document.getElementById('btn').addEventListener('click', function () {
+                document.getElementById('t1').textContent = '안녕하세요';
+                document.getElementById('t2').textContent = '안녕하세요';
+            });
+        };
+    </script>
+</head>
+<body>
+    안녕하세요
+    <h1 id="t1">
+        반갑습니다
+    </h1>
+    <h2 id="t2">
+        반갑습니다
+    </h2>
+    <button id="btn">변경</button>
+</body>
+</html>

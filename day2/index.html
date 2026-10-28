@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제주 특산물</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #fff7ed;
+      color: #222;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas:
+        "header  header"
+        "nav     nav"
+        "slider  slider"
+        "section aside"
+        "article aside"
+        "footer  footer";
+      gap: 12px;
+    }
+    header, nav, section, article, aside, footer {
+      background: #fff;
+      border: 2px solid #fdba74;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    header {
+      grid-area: header;
+      background: #f97316;
+      color: #fff;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 4px; font-size: 1.8rem; }
+    header p { margin: 0; }
+    nav {
+      grid-area: nav;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      background: #fed7aa;
+    }
+    nav a {
+      color: #7c2d12;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 14px;
+      border-radius: 6px;
+    }
+    nav a:hover { background: #fb923c; color: #fff; }
+    section { grid-area: section; }
+    article { grid-area: article; }
+    aside { grid-area: aside; background: #ffedd5; }
+    footer {
+      grid-area: footer;
+      text-align: center;
+      background: #7c2d12;
+      color: #fff;
+      border-color: #7c2d12;
+      font-size: 0.875rem;
+    }
+    h2 { margin-top: 0; color: #c2410c; }
+    h3 { margin: 0 0 4px; }
+    .item {
+      padding: 10px 0;
+      border-bottom: 1px dashed #fdba74;
+    }
+    .item:last-child { border-bottom: none; }
+    .item p { margin: 0; }
+    aside ul { padding-left: 1.2rem; margin: 0 0 16px; }
+    aside li { margin-bottom: 6px; }
+    @media (max-width: 640px) {
+      .wrap {
+        grid-template-columns: 1fr;
+        grid-template-areas: "header" "nav" "slider" "section" "article" "aside" "footer";
+      }
+    }
+    #gallery { grid-area: slider; }
+    #chatBtn {
+      position: fixed; right: 20px; bottom: 20px; z-index: 100;
+      background: #16a34a; color: #fff; text-decoration: none;
+      padding: 14px 20px; border-radius: 30px; font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    #chatBtn:hover { background: #15803d; }
+    #menuBtn {
+      position: fixed; left: 20px; bottom: 20px; z-index: 100;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: #1e40af; color: #fff; text-decoration: none;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; font-weight: bold; line-height: 1.3;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s, background 0.2s;
+    }
+    #menuBtn span { font-size: 2.2rem; }
+    #menuBtn:hover { background: #1d4ed8; transform: scale(1.08); }
+    @media (max-width: 640px) {
+      #menuBtn { width: 88px; height: 88px; left: 12px; bottom: 12px; font-size: 0.8rem; }
+      #menuBtn span { font-size: 1.7rem; }
+    }
+    #searchForm { display: flex; gap: 8px; margin-bottom: 10px; }
+    #searchForm input { flex: 1; padding: 10px; font-size: 1rem; border: 1px solid #fdba74; border-radius: 6px; }
+    #searchForm button, #pager button {
+      padding: 10px 18px; font-size: 1rem; border: 0; border-radius: 6px;
+      background: #f97316; color: #fff; cursor: pointer;
+    }
+    #searchForm button:hover, #pager button:hover { background: #ea580c; }
+    #pager button:disabled { background: #d1d5db; cursor: default; }
+    #msg { text-align: center; min-height: 1.4em; color: #b91c1c; margin: 0 0 6px; }
+    #viewer { position: relative; background: #000; border-radius: 10px; overflow: hidden; display: none; }
+    #viewer img { display: block; width: 100%; height: 420px; object-fit: contain; }
+    .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5); color: #fff; border: 0; border-radius: 6px;
+      font-size: 1.5rem; padding: 8px 14px; cursor: pointer;
+    }
+    #prev { left: 8px; }
+    #next { right: 8px; }
+    .badge {
+      position: absolute; bottom: 8px; background: rgba(0, 0, 0, 0.6);
+      color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 0.875rem;
+    }
+    #credit { left: 8px; }
+    #counter { right: 8px; }
+    #thumbs { display: none; gap: 6px; margin-top: 8px; overflow-x: auto; }
+    #thumbs img { width: 70px; height: 50px; object-fit: cover; border-radius: 4px; cursor: pointer; opacity: 0.6; }
+    #thumbs img.active { opacity: 1; outline: 2px solid #f97316; }
+    #pager { display: none; justify-content: center; align-items: center; gap: 12px; margin-top: 10px; }
+    #msg { overflow-wrap: anywhere; }
+    .wrap > * { min-width: 0; }
+    #viewer img { height: clamp(220px, 45vw, 420px); }
+    img { max-width: 100%; }
+
+    /* PC: 넓은 화면 */
+    @media (min-width: 1024px) {
+      .wrap { max-width: 1140px; grid-template-columns: 2.4fr 1fr; gap: 16px; padding: 20px; }
+      header h1 { font-size: 2.2rem; }
+      #viewer img { height: 480px; }
+    }
+
+    /* 태블릿 */
+    @media (min-width: 641px) and (max-width: 1023px) {
+      .wrap { grid-template-columns: 1.6fr 1fr; }
+    }
+
+    /* 모바일 */
+    @media (max-width: 640px) {
+      .wrap { padding: 8px; gap: 8px; }
+      header, nav, section, article, aside, footer, #gallery { padding: 12px; }
+      header h1 { font-size: 1.35rem; }
+      nav { gap: 4px; }
+      nav a { padding: 6px 10px; font-size: 0.9rem; }
+      h2 { font-size: 1.15rem; }
+      #searchForm { flex-direction: column; }
+      #searchForm button { width: 100%; }
+      .nav-btn { font-size: 1.2rem; padding: 6px 10px; }
+      #pager { flex-wrap: wrap; }
+      #pager button { padding: 8px 12px; font-size: 0.9rem; }
+      #chatBtn { right: 12px; bottom: 12px; padding: 12px 16px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🍊 제주 특산물 이야기 🌊</h1>
+      <p>바람과 햇살, 바다가 키운 제주의 맛을 만나 보세요</p>
+    </header>
+
+    <nav>
+      <a href="#fruit">🍊 과일</a>
+      <a href="#sea">🐟 수산물</a>
+      <a href="#meat">🐖 육류</a>
+      <a href="#snack">🍡 가공·간식</a>
+      <a href="#tip">💡 구매 팁</a>
+    </nav>
+
+    <div id="gallery" class="gallery-box" style="background:#fff;border:2px solid #fdba74;border-radius:10px;padding:16px;">
+      <h2>🖼️ 제주 이미지 갤러리</h2>
+      <form id="searchForm">
+        <input id="query" type="text" value="제주도" placeholder="검색어 (예: 감귤, 한라봉, 제주 바다)" required>
+        <button type="submit">검색</button>
+      </form>
+      <p id="msg"></p>
+      <div id="viewer">
+        <img id="slide" alt="">
+        <button class="nav-btn" id="prev" type="button">&#10094;</button>
+        <button class="nav-btn" id="next" type="button">&#10095;</button>
+        <span class="badge" id="credit"></span>
+        <span class="badge" id="counter"></span>
+      </div>
+      <div id="thumbs"></div>
+      <div id="pager">
+        <button id="prevPage" type="button">이전 10개</button>
+        <span id="pageInfo"></span>
+        <button id="toggle" type="button">⏸ 정지</button>
+        <button id="nextPage" type="button">다음 10개</button>
+      </div>
+    </div>
+
+    <section id="fruit">
+      <h2>🍊 제주의 과일</h2>
+      <div class="item">
+        <h3>🍊 감귤</h3>
+        <p>제주를 대표하는 새콤달콤한 과일입니다. 겨울철 비타민 보충에 좋고, 껍질째 먹기 좋은 극조생부터 만감류까지 다양합니다.</p>
+      </div>
+      <div class="item">
+        <h3>🟠 한라봉</h3>
+        <p>꼭지 부분이 볼록 솟아 한라산을 닮은 과일입니다. 알이 굵고 과즙이 풍부하며 향이 진합니다.</p>
+      </div>
+      <div class="item">
+        <h3>🧡 천혜향</h3>
+        <p>하늘이 내린 향기라는 이름처럼 향긋하고 부드러운 단맛이 특징입니다.</p>
+      </div>
+      <div class="item">
+        <h3>🍋 레드향 · 황금향</h3>
+        <p>껍질이 얇고 과육이 달콤해서 선물용으로도 인기가 많습니다.</p>
+      </div>
+    </section>
+
+    <article id="sea">
+      <h2>🐟 바다가 주는 선물</h2>
+      <div class="item">
+        <h3>🐟 갈치</h3>
+        <p>은빛 제주 갈치는 구이와 조림 모두 담백하고 고소합니다.</p>
+      </div>
+      <div class="item">
+        <h3>🐠 옥돔</h3>
+        <p>살이 단단하고 맛이 깊어 예로부터 귀한 생선으로 대접받았습니다.</p>
+      </div>
+      <div class="item">
+        <h3>🐚 전복 · 소라 · 성게</h3>
+        <p>해녀가 직접 물질해 건져 올린 신선한 해산물입니다.</p>
+      </div>
+      <div class="item">
+        <h3>🦑 한치</h3>
+        <p>여름철 시원한 물회나 쫄깃한 건한치로 즐기기 좋습니다.</p>
+      </div>
+
+      <h2 id="meat" style="margin-top:20px;">🐖 제주의 고기</h2>
+      <div class="item">
+        <h3>🐖 흑돼지</h3>
+        <p>쫄깃한 식감과 고소한 풍미로 제주 여행의 필수 메뉴로 꼽힙니다. 구이, 고기국수, 순대로 만나 보세요.</p>
+      </div>
+    </article>
+
+    <aside id="snack">
+      <h2>🍡 간식 · 가공품</h2>
+      <ul>
+        <li>🍡 오메기떡</li>
+        <li>🍫 감귤 초콜릿</li>
+        <li>🍵 제주 녹차</li>
+        <li>🍯 귤 청 · 한라봉 청</li>
+        <li>🍰 귤 타르트 · 쿠키</li>
+        <li>🥜 땅콩 · 우도 땅콩 과자</li>
+        <li>🌿 제주 고사리</li>
+      </ul>
+
+      <h2 id="tip">💡 구매 팁</h2>
+      <ul>
+        <li>🗓️ 감귤은 겨울, 한라봉은 늦겨울~봄이 제철입니다.</li>
+        <li>📦 산지 직송으로 신선하게 받아 보세요.</li>
+        <li>🏷️ 원산지와 등급 표시를 확인하세요.</li>
+        <li>🎁 선물용은 포장 상태를 꼭 살펴보세요.</li>
+        <li>🧊 수산물은 냉장·냉동 배송을 선택하세요.</li>
+      </ul>
+    </aside>
+
+    <footer>
+      &copy; 2026 제주 특산물 홍보 사이트 · 🌺 혼저 옵서예!
+    </footer>
+  </div>
+
+  <a id="menuBtn" href="reactive.html" target="_blank" rel="noopener"><span>🧭</span>카테고리</a>
+
+  <a id="chatBtn"href="agent.html" target="_blank" rel="noopener">💬 오름 추천 에이전트</a>
+
+  <script>
+    const PER_PAGE = 10;
+    let images = [], index = 0, page = 1, total = 0;
+    const $ = id => document.getElementById(id);
+
+    async function search(newQuery) {
+      const q = $('query').value.trim();
+      if (!q) return;
+      if (newQuery) page = 1;
+      $('msg').textContent = '불러오는 중...';
+      try {
+        const res = await fetch('/api/pixabay?q=' + encodeURIComponent(q) + '&page=' + page);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || '요청 실패 (' + res.status + ')');
+        images = data.hits;
+        total = data.totalHits;
+        if (!images.length) {
+          $('msg').textContent = '검색 결과가 없습니다.';
+          $('viewer').style.display = $('thumbs').style.display = $('pager').style.display = 'none';
+          return;
+        }
+        $('msg').textContent = '';
+        index = 0;
+        render();
+        startAuto();
+      } catch (err) {
+        $('msg').textContent = err.message;
+      }
+    }
+
+    function render() {
+      const img = images[index];
+      $('slide').src = img.webformatURL;
+      $('slide').alt = img.tags;
+      $('counter').textContent = (index + 1) + ' / ' + images.length;
+      $('credit').textContent = 'by ' + img.user + ' · Pixabay';
+      $('viewer').style.display = 'block';
+
+      $('thumbs').innerHTML = '';
+      images.forEach((im, i) => {
+        const t = document.createElement('img');
+        t.src = im.previewURL;
+        t.alt = im.tags;
+        if (i === index) t.className = 'active';
+        t.onclick = () => { stopAuto(); index = i; render(); };
+        $('thumbs').appendChild(t);
+      });
+      $('thumbs').style.display = 'flex';
+
+      const lastPage = Math.max(1, Math.ceil(total / PER_PAGE));
+      $('pageInfo').textContent = page + ' / ' + lastPage + ' 페이지';
+      $('prevPage').disabled = page <= 1;
+      $('nextPage').disabled = page >= lastPage;
+      $('pager').style.display = 'flex';
+    }
+
+    function move(step) {
+      index = (index + step + images.length) % images.length;
+      render();
+    }
+
+    let timer = null;
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(() => move(1), 500);
+      $('toggle').textContent = '⏸ 정지';
+    }
+    function stopAuto() {
+      clearInterval(timer);
+      timer = null;
+      $('toggle').textContent = '▶ 재생';
+    }
+    $('toggle').onclick = () => (timer ? stopAuto() : startAuto());
+
+    $('searchForm').addEventListener('submit', e => { e.preventDefault(); search(true); });
+    $('prev').onclick = () => { stopAuto(); move(-1); };
+    $('next').onclick = () => { stopAuto(); move(1); };
+    $('prevPage').onclick = () => { page--; search(false); };
+    $('nextPage').onclick = () => { page++; search(false); };
+    document.addEventListener('keydown', e => {
+      if (!images.length || e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowLeft') { stopAuto(); move(-1); }
+      if (e.key === 'ArrowRight') { stopAuto(); move(1); }
+    });
+
+    search(true);
+  </script>
+</body>
+</html>

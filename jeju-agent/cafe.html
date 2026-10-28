@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제주 카페</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #fffaf3;
+      color: #3a2a1a;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .today {
+      background: #ff8c1a;
+      color: #fff;
+      text-align: center;
+      padding: 28px 16px;
+    }
+    .today h2 { margin: 0 0 8px; font-size: 1.1rem; font-weight: normal; letter-spacing: 0.05em; }
+    .today p { margin: 0; font-size: clamp(1.5rem, 6vw, 2.2rem); font-weight: bold; word-break: keep-all; }
+    header { text-align: center; padding: 28px 16px 8px; }
+    header h1 { margin: 0; font-size: clamp(2rem, 7vw, 3rem); color: #c9600a; }
+    main { max-width: 800px; margin: 0 auto; padding: 12px 16px 32px; }
+    ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    li {
+      background: #fff;
+      border-left: 6px solid #ff8c1a;
+      box-shadow: 0 0 0 1px #f3dcc0;
+      padding: 14px 16px;
+    }
+    .name { display: block; font-size: 1.4rem; font-weight: bold; }
+    .menu { font-size: 1.1rem; }
+    .loc { display: block; font-size: 1.05rem; color: #c9600a; }
+  </style>
+</head>
+<body>
+  <section class="today">
+    <h2>오늘의 제주 한마디</h2>
+    <p>"천천히 가도 괜찮아, 제주니까."</p>
+  </section>
+  <header>
+    <h1>제주 카페</h1>
+  </header>
+  <main>
+    <ul>
+      <li><span class="name">귤카페</span><span class="menu">감귤 주스</span><span class="loc">서귀포시 남원읍</span></li>
+      <li><span class="name">바다뷰 카페</span><span class="menu">한라봉 에이드</span><span class="loc">제주시 애월읍</span></li>
+      <li><span class="name">돌담 카페</span><span class="menu">당근 케이크</span><span class="loc">제주시 구좌읍</span></li>
+    </ul>
+  </main>
+</body>
+</html>

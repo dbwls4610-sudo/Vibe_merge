@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나의 제주 여행 취향 카드</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #fafafa;
+      color: #222;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 48px 20px 40px; }
+    .hero { text-align: center; margin-bottom: 36px; }
+    .eyebrow { margin: 0 0 8px; font-size: 0.95rem; color: #777; letter-spacing: 0.08em; }
+    .nick { display: flex; align-items: center; justify-content: center; gap: 14px; }
+    .avatar {
+      flex: none;
+      width: clamp(60px, 19vw, 112px);
+      height: clamp(60px, 19vw, 112px);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 3px #fff, 0 0 0 5px #f0a093;
+      transition: transform 0.2s ease;
+    }
+    .avatar:hover { transform: scale(1.1); }
+    .hero h1 { margin: 0; font-size: clamp(2.6rem, 14vw, 5.5rem); line-height: 1.1; color: #e8806f; white-space: nowrap; }
+    .hero p { margin: 12px 0 0; font-size: 1.25rem; color: #444; word-break: keep-all; }
+    .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .icon {
+      flex: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #f0a093;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon svg { width: 28px; height: 28px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .label { display: block; font-size: 0.9rem; color: #777; }
+    .value { display: block; font-size: 1.35rem; font-weight: bold; }
+    .section-title { margin: 40px 0 14px; font-size: 1.2rem; color: #444; }
+    .place { display: block; background: #fff; border: 1px solid #ececec; border-radius: 16px; padding: 18px; }
+    .place .value { margin-bottom: 4px; }
+    .place .why { display: block; font-size: 1rem; color: #555; word-break: keep-all; }
+    .agent {
+      margin-top: 28px;
+      background: #fdecea;
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .agent .label { color: #b85c4d; }
+    .agent .value { font-size: 1.1rem; word-break: keep-all; }
+    @media (min-width: 560px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+      .wide { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">나의 제주 여행 취향 카드</p>
+      <div class="nick">
+        <img class="avatar" src="images/character.svg" alt="귤 캡모자를 쓴 토마토 캐릭터">
+        <h1>토마토</h1>
+      </div>
+      <p>제주를 모르는 제주토박이</p>
+    </header>
+    <section class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></div>
+        <div><span class="label">여행 스타일</span><span class="value">바다, 맛집</span></div>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div><span class="label">여행 속도</span><span class="value">알차게</span></div>
+      </div>
+      <div class="card wide">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2.5 2-3.5 5-3.5 8H17"/></svg></div>
+        <div><span class="label">좋아하는 음식</span><span class="value">해물탕, 아구찜</span></div>
+      </div>
+    </section>
+    <h2 class="section-title">가 보고 싶은 제주 장소</h2>
+    <section class="cards">
+      <div class="place"><span class="value">협재해수욕장</span><span class="why">에메랄드빛 물색 앞에서 멍하니 쉬고 싶어서</span></div>
+      <div class="place"><span class="value">함덕해수욕장</span><span class="why">맑은 옥빛 바다에 발을 담가 보고 싶어서</span></div>
+      <div class="place wide"><span class="value">김녕해수욕장</span><span class="why">투명한 파란 물빛을 가까이에서 보고 싶어서</span></div>
+    </section>
+    <div class="agent">
+      <span class="label">8일 뒤 내 에이전트에게 시키고 싶은 일</span>
+      <span class="value">제주 날씨와 내 취향(바다, 맛집)을 보고 하루 맛집 코스를 짜 주는 '제주 코스 에이전트'</span>
+    </div>
+  </div>
+</body>
+</html>

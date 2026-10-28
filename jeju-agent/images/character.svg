@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="귤 모자를 쓴 토마토 캐릭터">
+  <rect width="400" height="400" rx="36" fill="#d6f1fb"/>
+  <circle cx="330" cy="70" r="30" fill="#fff3b8"/>
+  <ellipse cx="90" cy="80" rx="38" ry="14" fill="#ffffff" opacity="0.9"/>
+  <ellipse cx="115" cy="70" rx="26" ry="12" fill="#ffffff" opacity="0.9"/>
+  <path d="M0 250 Q50 232 100 250 T200 250 T300 250 T400 250 V400 H0 Z" fill="#8edcec"/>
+  <path d="M0 290 Q50 272 100 290 T200 290 T300 290 T400 290 V400 H0 Z" fill="#5cc7de"/>
+  <path d="M0 335 Q50 318 100 335 T200 335 T300 335 T400 335 V400 H0 Z" fill="#3bb4d0"/>
+  <path d="M40 270 q10 -8 20 0 M310 305 q10 -8 20 0 M330 262 q8 -6 16 0" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <ellipse cx="200" cy="352" rx="82" ry="12" fill="#2a9bb8" opacity="0.35"/>
+  <circle cx="200" cy="235" r="112" fill="#f4685a"/>
+  <path d="M120 215 A92 92 0 0 1 168 148" stroke="#ff9d90" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="92" cy="268" r="20" fill="#f4685a"/>
+  <circle cx="308" cy="268" r="20" fill="#f4685a"/>
+  <circle cx="162" cy="238" r="12" fill="#4a2a2a"/>
+  <circle cx="238" cy="238" r="12" fill="#4a2a2a"/>
+  <circle cx="166" cy="233" r="4" fill="#ffffff"/>
+  <circle cx="242" cy="233" r="4" fill="#ffffff"/>
+  <ellipse cx="132" cy="268" rx="17" ry="11" fill="#ff9aa8" opacity="0.8"/>
+  <ellipse cx="268" cy="268" rx="17" ry="11" fill="#ff9aa8" opacity="0.8"/>
+  <path d="M182 266 Q200 288 218 266" stroke="#4a2a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <g transform="rotate(11 200 176)">
+  <path d="M220 168 H104 Q72 168 72 181 Q72 192 104 192 H220 Z" fill="#ff8f1f"/>
+  <path d="M128 176 A72 72 0 0 1 272 176 Z" fill="#ffa63d"/>
+  <path d="M200 104 Q222 132 220 176" stroke="#ff8f1f" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <rect x="128" y="168" width="144" height="12" rx="6" fill="#ff8f1f"/>
+  <path d="M150 146 A56 56 0 0 1 188 122" stroke="#ffd08a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M200 100 q-4 -14 -2 -22" stroke="#5a8f3a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M198 86 q22 -26 44 -8 q-18 22 -44 8 Z" fill="#7cc15a"/>
+  </g>
+</svg>

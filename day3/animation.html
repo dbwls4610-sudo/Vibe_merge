@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코드 실행 애니메이션</title>
+    <style>
+        body { margin: 0; padding: 16px; font-family: sans-serif; background: #1e1e2e; color: #e8ecf5; }
+        h1 { font-size: 20px; margin: 0 0 12px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+        .box { background: #2a2a3e; border-radius: 8px; padding: 12px; }
+        .box h2 { font-size: 13px; margin: 0 0 8px; color: #9aa4c0; font-weight: normal; }
+        pre { margin: 0; font-family: Consolas, monospace; font-size: 15px; }
+        .line { padding: 2px 8px; border-radius: 4px; white-space: pre; transition: background .3s; }
+        .line.on { background: #f5c542; color: #111; }
+        .arr { display: flex; gap: 6px; margin-bottom: 12px; }
+        .cell { width: 48px; height: 48px; border: 2px solid #5b6488; border-radius: 6px; display: flex; flex-direction: column;
+                align-items: center; justify-content: center; font-weight: bold; transition: all .3s; }
+        .cell small { font-size: 10px; color: #9aa4c0; font-weight: normal; }
+        .cell.on { border-color: #f5c542; background: #4a4020; transform: scale(1.15); }
+        .var { display: flex; justify-content: space-between; padding: 6px 8px; margin: 4px 0; background: #1e1e2e; border-radius: 6px; font-family: Consolas, monospace; }
+        .var b { color: #5ce1e6; transition: color .3s; }
+        .var.flash b { color: #ff6b9d; }
+        #console { min-height: 90px; font-family: Consolas, monospace; font-size: 15px; color: #7ee787; }
+        #explain { margin-top: 12px; padding: 12px; background: #2a2a3e; border-left: 4px solid #f5c542; border-radius: 4px; min-height: 40px; }
+        .ctrl { margin-top: 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        button { padding: 8px 14px; font-size: 14px; border: 0; border-radius: 6px; cursor: pointer; background: #4a5280; color: #fff; }
+        button:hover { background: #5b64a0; }
+        #count { margin-left: auto; color: #9aa4c0; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <h1>코드가 한 줄씩 실행되는 모습</h1>
+    <div class="grid">
+        <div class="box">
+            <h2>코드</h2>
+            <pre id="code"></pre>
+        </div>
+        <div class="box">
+            <h2>변수 (메모리)</h2>
+            <div>arr</div>
+            <div class="arr" id="arr"></div>
+            <div class="var" id="vv">v <b id="v">-</b></div>
+            <div class="var" id="vf">f(v) <b id="fv">-</b></div>
+            <div class="var" id="vs">sum <b id="sum">-</b></div>
+            <h2 style="margin-top:12px">콘솔 출력</h2>
+            <div id="console"></div>
+        </div>
+    </div>
+    <div id="explain"></div>
+    <div class="ctrl">
+        <button id="prev">◀ 이전</button>
+        <button id="next">다음 ▶</button>
+        <button id="play">▶ 자동 재생</button>
+        <button id="reset">↺ 처음부터</button>
+        <span id="count"></span>
+    </div>
+    <script>
+        const code = [
+            "const f = (i) => i * 3",
+            "let arr = [10, 20, 30]",
+            "let sum = 0",
+            "for (const v of arr) {",
+            "    console.log('v= ' + v)",
+            "    sum = sum + f(v)",
+            "}",
+            "console.log(sum)",
+        ]
+        const f = i => i * 3
+        const arr = [10, 20, 30]
+
+        // 실행 과정을 미리 계산해서 단계(step) 목록으로 만든다.
+        const steps = []
+        const logs = []
+        let sum = null
+        let defined = { f: false, arr: false }
+        const push = (line, text, extra = {}) =>
+            steps.push({ line, text, logs: [...logs], sum, arr: defined.arr, idx: null, v: null, fv: null, ...extra })
+
+        defined.f = true
+        push(0, "함수 f를 만듭니다. f는 숫자를 받아서 3배로 돌려주는 함수입니다. 아직 실행은 안 합니다.")
+        defined.arr = true
+        push(1, "배열 arr을 만듭니다. 10, 20, 30 세 개의 값이 들어 있습니다.")
+        sum = 0
+        push(2, "합계를 담을 변수 sum을 0으로 시작합니다.")
+        arr.forEach((v, k) => {
+            push(3, `for...of 반복문: arr의 ${k + 1}번째 값 ${v}을(를) 꺼내 v에 담습니다.`, { idx: k, v })
+            logs.push("v= " + v)
+            push(4, `콘솔에 'v= ${v}'를 출력합니다.`, { idx: k, v })
+            const next = sum + f(v)
+            push(5, `f(${v}) = ${v} × 3 = ${f(v)}. 그래서 sum = ${sum} + ${f(v)} = ${next}`, { idx: k, v, fv: f(v), flashSum: true, newSum: next })
+            sum = next
+            steps[steps.length - 1].sum = sum
+        })
+        logs.push(String(sum))
+        push(7, `반복이 모두 끝났습니다. 마지막으로 sum을 출력합니다. 10×3 + 20×3 + 30×3 = ${sum}`, { fv: null })
+
+        const $ = id => document.getElementById(id)
+        $("code").innerHTML = code.map((c, i) => `<div class="line" id="l${i}"></div>`).join("")
+        code.forEach((c, i) => $("l" + i).textContent = (i + 1) + "  " + c)
+
+        let cur = 0
+        function render() {
+            const s = steps[cur]
+            code.forEach((_, i) => $("l" + i).classList.toggle("on", i === s.line))
+            $("arr").innerHTML = ""
+            if (s.arr) arr.forEach((x, k) => {
+                const d = document.createElement("div")
+                d.className = "cell" + (k === s.idx ? " on" : "")
+                d.innerHTML = `${x}<small>[${k}]</small>`
+                $("arr").appendChild(d)
+            })
+            $("v").textContent = s.v ?? "-"
+            $("fv").textContent = s.fv ?? "-"
+            $("sum").textContent = s.sum ?? "-"
+            $("vs").classList.toggle("flash", !!s.flashSum)
+            $("console").innerHTML = ""
+            s.logs.forEach(t => { const d = document.createElement("div"); d.textContent = "> " + t; $("console").appendChild(d) })
+            $("explain").textContent = s.text
+            $("count").textContent = `${cur + 1} / ${steps.length}`
+        }
+
+        let timer = null
+        const stop = () => { clearInterval(timer); timer = null; $("play").textContent = "▶ 자동 재생" }
+        $("next").onclick = () => { stop(); if (cur < steps.length - 1) { cur++; render() } }
+        $("prev").onclick = () => { stop(); if (cur > 0) { cur--; render() } }
+        $("reset").onclick = () => { stop(); cur = 0; render() }
+        $("play").onclick = () => {
+            if (timer) return stop()
+            if (cur === steps.length - 1) cur = 0
+            render()
+            $("play").textContent = "⏸ 멈춤"
+            timer = setInterval(() => {
+                if (cur >= steps.length - 1) return stop()
+                cur++
+                render()
+            }, 1600)
+        }
+        render()
+    </script>
+</body>
+</html>

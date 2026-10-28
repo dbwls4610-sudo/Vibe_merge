@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제주 맛집 지도</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #fffaf3;
+      color: #3a2a1a;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    header {
+      background: #ff8c1a;
+      color: #fff;
+      text-align: center;
+      padding: 36px 16px;
+    }
+    header h1 { margin: 0 0 8px; font-size: clamp(2rem, 7vw, 3rem); }
+    header p { margin: 0; font-size: 1.1rem; }
+    main { max-width: 800px; margin: 0 auto; padding: 20px 16px; }
+    ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; counter-reset: n; }
+    li {
+      counter-increment: n;
+      position: relative;
+      background: #fff;
+      border-left: 6px solid #ff8c1a;
+      box-shadow: 0 0 0 1px #f3dcc0;
+      padding: 14px 14px 14px 62px;
+    }
+    li::before {
+      content: counter(n);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #ff8c1a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .name { font-size: 1.4rem; font-weight: bold; }
+    .menu { font-size: 1.1rem; }
+    .loc { font-size: 1.05rem; color: #c9600a; }
+    footer { text-align: center; color: #8a7358; font-size: 0.9rem; padding: 8px 16px 32px; }
+    @media (min-width: 640px) {
+      li {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 16px;
+        align-items: center;
+        padding-left: 66px;
+        min-height: 66px;
+      }
+      li::before { top: 50%; transform: translateY(-50%); }
+      .name { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>제주 맛집 지도</h1>
+    <p>제주 여행에서 꼭 먹어볼 맛집 12곳</p>
+  </header>
+  <main>
+    <ol>
+      <li><span class="name">도남황금갈비</span><span class="menu">생갈비</span><span class="loc">제주시 도남동</span></li>
+      <li><span class="name">삼대국수회관</span><span class="menu">고기국수</span><span class="loc">제주시 삼도이동</span></li>
+      <li><span class="name">우진해장국</span><span class="menu">고사리육개장</span><span class="loc">제주시 일도일동</span></li>
+      <li><span class="name">돈사돈</span><span class="menu">흑돼지 근고기</span><span class="loc">제주시 연동</span></li>
+      <li><span class="name">옥돔식당</span><span class="menu">옥돔구이</span><span class="loc">서귀포시 중앙동</span></li>
+      <li><span class="name">성게미역국집</span><span class="menu">성게미역국</span><span class="loc">제주시 한림읍</span></li>
+      <li><span class="name">갈치조림집</span><span class="menu">은갈치조림</span><span class="loc">제주시 이도이동</span></li>
+      <li><span class="name">고등어회집</span><span class="menu">고등어회</span><span class="loc">서귀포시 법환동</span></li>
+      <li><span class="name">전복죽집</span><span class="menu">전복죽</span><span class="loc">제주시 구좌읍</span></li>
+      <li><span class="name">몸국집</span><span class="menu">모자반 몸국</span><span class="loc">제주시 건입동</span></li>
+      <li><span class="name">오메기떡집</span><span class="menu">오메기떡</span><span class="loc">서귀포시 성산읍</span></li>
+      <li><span class="name">귤카페</span><span class="menu">감귤 주스</span><span class="loc">서귀포시 남원읍</span></li>
+    </ol>
+  </main>
+  <footer>일부 상호와 위치는 예시이니 방문 전 영업 여부와 시간을 꼭 확인하세요.</footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function plus(a, b){
+            return a+b
+        }
+
+        function plus(a, b){
+            return a+b
+        }
+
+        function minus(a, b){      // fminus -> minus (이름을 호출하는 쪽과 맞춤)
+            return a-b
+        }
+         function mul(a, b){
+            return a*b
+        }
+
+        function div(a, b){
+            return a/b
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('button#plus').addEventListener('click', function () {
+                // input 값은 문자열이라 Number()로 숫자로 바꿔야 "4"+"6"="46"이 되지 않음
+                var a = Number(document.querySelector('input#a').value)
+                var b = Number(document.querySelector('input#b').value)
+                document.querySelector('h2#result').textContent = a + ' + ' + b + ' = ' + plus(a, b)
+            });
+
+            document.querySelector('button#minus').addEventListener('click', function () {
+                var a = Number(document.querySelector('input#a').value)
+                var b = Number(document.querySelector('input#b').value)
+                document.querySelector('h2#result').textContent = a + ' - ' + b + ' = ' + minus(a, b)
+            });
+
+            document.querySelector('button#mul').addEventListener('click', function () {
+                var a = Number(document.querySelector('input#a').value)
+                var b = Number(document.querySelector('input#b').value)
+                document.querySelector('h2#result').textContent = a + ' x ' + b + ' = ' + mul(a, b)            });
+
+            document.querySelector('button#div').addEventListener('click', function () {
+                var a = Number(document.querySelector('input#a').value)
+                var b = Number(document.querySelector('input#b').value)
+                document.querySelector('h2#result').textContent = a + ' ÷ ' + b + ' = ' + div(a, b)
+            });
+
+        });
+    </script>
+</head>
+<body>
+    안녕하세요
+    <h1>
+        반갑습니다
+    </h1>
+    <h2 id="result">
+        결과가 여기에 표시됩니다
+    </h2>
+    <input id="a" type="number" placeholder="첫 번째 숫자">
+    <input id="b" type="number" placeholder="두 번째 숫자">
+    <button id="plus">덧셈</button>
+    <button id="minus">뺄셈</button>
+    <button id="mul">곱셈</button>
+    <button id="div">나눗셈</button>
+</body>
+</html>
