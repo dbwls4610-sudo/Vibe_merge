@@ -1,0 +1,150 @@
+{
+  "region": "제주특별자치도",
+  "topic": "제주 카페·맛집",
+  "items": [
+    {
+      "name": "앤트러사이트 제주 한림",
+      "category": "카페",
+      "description": "제주시 한림읍의 옛 전분공장을 개조한 대형 카페. 빈티지한 공간과 직접 로스팅한 커피가 매력",
+      "score": 90,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "베케",
+      "category": "카페",
+      "description": "서귀포시 효돈동의 정원형 카페. 제주 자생식물 정원을 거닐며 쉬어가기 좋은 곳",
+      "score": 88,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "오설록 티뮤지엄",
+      "category": "카페",
+      "description": "서귀포시 안덕면의 녹차밭 옆 티 뮤지엄. 제주산 녹차 음료와 디저트를 즐길 수 있음",
+      "score": 85,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "봄날",
+      "category": "카페",
+      "description": "제주시 애월읍 해안가의 오션뷰 카페. 바다를 바라보며 여유를 즐기기 좋음",
+      "score": 82,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "명월국민학교",
+      "category": "카페",
+      "description": "제주시 한림읍 폐교를 활용한 복합문화 카페. 옛 교실 감성과 소품 구경이 재미있음",
+      "score": 80,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "더클리프",
+      "category": "카페",
+      "description": "서귀포시 중문 해안 절벽 위에 자리한 카페 겸 레스토랑. 탁 트인 바다 전망",
+      "score": 78,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "월정리 해변 카페거리",
+      "category": "카페",
+      "description": "제주시 구좌읍 월정리의 에메랄드빛 바다 앞에 늘어선 카페들. 산책과 함께 즐기기 좋음",
+      "score": 76,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "돈사돈",
+      "category": "음식점",
+      "description": "제주시 연동의 흑돼지 전문점. 두툼한 근고기를 직접 구워주는 방식으로 유명",
+      "score": 90,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "올래국수",
+      "category": "음식점",
+      "description": "제주시 연동의 고기국수 맛집. 진한 돼지고기 육수와 부드러운 수육 고명이 특징",
+      "score": 88,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "자매국수",
+      "category": "음식점",
+      "description": "제주시 연동의 고기국수 전문점. 걸쭉한 국물과 두툼한 고기가 인기",
+      "score": 85,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "우진해장국",
+      "category": "음식점",
+      "description": "제주시 삼도동의 향토음식점. 고사리육개장이 대표 메뉴",
+      "score": 87,
+      "selected": true,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "숙성도",
+      "category": "음식점",
+      "description": "제주시의 흑돼지 숙성 고기 전문점. 숙성 고기의 풍미로 웨이팅이 긴 편",
+      "score": 86,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "명진전복",
+      "category": "음식점",
+      "description": "제주시 구좌읍의 전복 요리 전문점. 전복뚝배기와 전복죽이 대표 메뉴",
+      "score": 83,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "김만복김밥",
+      "category": "음식점",
+      "description": "제주시의 김밥 전문점. 간편하게 즐기는 제주 대표 김밥으로 포장 손님이 많음",
+      "score": 78,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "산방식당",
+      "category": "음식점",
+      "description": "서귀포시 안덕면의 밀면·국수 맛집. 산방산 인근 여행 중 들르기 좋음",
+      "score": 82,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "이춘옥원조고등어쌈밥",
+      "category": "음식점",
+      "description": "서귀포시의 고등어쌈밥 전문점. 구운 고등어를 쌈에 싸 먹는 제주식 한 상",
+      "score": 80,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "동문시장",
+      "category": "음식점",
+      "description": "제주시의 전통시장. 해산물, 분식, 길거리 간식 등 다양한 먹거리를 한곳에서 맛봄",
+      "score": 84,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    },
+    {
+      "name": "서귀포 매일올레시장",
+      "category": "음식점",
+      "description": "서귀포시의 대표 시장. 감귤 디저트와 제주 먹거리를 구경하며 즐기기 좋음",
+      "score": 83,
+      "selected": false,
+      "source": "https://www.visitjeju.net"
+    }
+  ]
+}
