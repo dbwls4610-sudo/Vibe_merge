@@ -295,8 +295,20 @@ function buildFilters() {
   });
 }
 
-fetch(DATA_URL)
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+// 서버로 열면 JSON을 읽고, 파일을 바로 열었을 때(file://)는 jeju_data.js로 대신 읽음
+function loadData() {
+  return fetch(DATA_URL)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .catch(() => new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "jeju_data.js";
+      s.onload = () => resolve(window.JEJU_DATA);
+      s.onerror = () => reject(new Error("jeju_cafe_restaurant.json / jeju_data.js 없음"));
+      document.head.appendChild(s);
+    }));
+}
+
+loadData()
   .then(data => {
     items = data.items.map(i => ({ ...i, _pos: locate(i) }));
     document.getElementById("sub").textContent = `${data.region} · ${items.length}곳`;
@@ -307,7 +319,7 @@ fetch(DATA_URL)
   .catch(err => {
     document.querySelector("main").innerHTML =
       `<div id="error"><b>데이터를 불러오지 못했어요.</b><br>
-      파일을 더블클릭해서 열면 브라우저가 JSON 읽기를 막아요. VS Code의 Live Server 같은 로컬 서버로 열어 주세요.<br>
+      index.html과 같은 폴더에 jeju_cafe_restaurant.json, jeju_data.js가 있는지 확인해 주세요.<br>
       <small>(${esc(err.message)})</small></div>`;
   });
 </script>
